@@ -4,27 +4,50 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.starbucksorder.another_back.repository.AdminMapper">
+
+    <resultMap id="adminResultMap" type="com.starbucksorder.another_back.entity.Admin">
+        <id column="admin_id" property="adminId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="update_date" property="updateDate"/>
+        <collection property="userRoles" javaType="java.util.Set" resultMap="userRoleResultMap"/>
+
+    </resultMap>
+    <resultMap id="userRoleResultMap" type="com.starbucksorder.another_back.entity.UserRoles">
+        <id column="user_role_id" property="userRoleId"/>
+        <result column="urt_user_id" property="userId"/>
+        <result column="urt_role_id" property="roleId"/>
+        <association property="role" resultMap="roleResultMap" />
+    </resultMap>
+    <resultMap id="roleResultMap" type="com.starbucksorder.another_back.entity.Role">
+        <id column="rt_role_id" property="roleId"/>
+        <result column="role_name" property="name"/>
+    </resultMap>
+
+
     <select id="findById" resultMap="adminResultMap">
         SELECT
-        amt.admin_id,
-        amt.username,
-        amt.password,
-        amt.register_date,
-        amt.update_date,
+            amt.admin_id,
+            amt.username,
+            amt.password,
+            amt.register_date,
+            amt.update_date,
 
-        urt.user_role_id,
-        urt.user_id as urt_user_id,
-        urt.role_id as urt_role_id,
+            urt.user_role_id,
+            urt.user_id as urt_user_id,
+            urt.role_id as urt_role_id,
 
-        rt.role_id as rt_role_id,
-        rt.role_name
+            rt.role_id as rt_role_id,
+            rt.role_name
         FROM
-        admin_tb amt
-        LEFT OUTER JOIN user_role_tb urt on (urt.user_id = amt.admin_id)
-        LEFT OUTER JOIN role_tb rt on (rt.role_id = urt.role_id)
+            admin_tb amt
+            LEFT OUTER JOIN user_role_tb urt on (urt.user_id = amt.admin_id)
+            LEFT OUTER JOIN role_tb rt on (rt.role_id = urt.role_id)
         WHERE
-        amt.admin_id = #{adminId}
+            amt.admin_id = #{adminId}
     </select>
+
     <select id="findByUserName" resultMap="adminResultMap">
         SELECT
             amt.admin_id,
@@ -46,26 +69,6 @@
         WHERE
             amt.username = #{username}
     </select>
-
-    <resultMap id="adminResultMap" type="com.starbucksorder.another_back.entity.Admin">
-        <id column="admin_id" property="adminId"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="register_date" property="registerDate"/>
-        <result column="update_date" property="updateDate"/>
-        <collection property="userRoles" javaType="java.util.Set" resultMap="userRoleResultMap"/>
-
-    </resultMap>
-    <resultMap id="userRoleResultMap" type="com.starbucksorder.another_back.entity.UserRoles">
-        <id column="user_role_id" property="userRoleId"/>
-        <result column="urt_user_id" property="userId"/>
-        <result column="urt_role_id" property="roleId"/>
-        <association property="role" resultMap="roleResultMap" />
-    </resultMap>
-<resultMap id="roleResultMap" type="com.starbucksorder.another_back.entity.Role">
-        <id column="rt_role_id" property="roleId"/>
-        <result column="role_name" property="name"/>
-    </resultMap>
 
 
 </mapper>

@@ -4,14 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.starbucksorder.another_back.repository.MenuDetailMapper">
-    <!--    메뉴 추가-->
-
-<!--    <insert id="save">-->
-<!--        INSERT INTO-->
-<!--            menu_detail_tb(menu_id, option_id)-->
-<!--        VALUES-->
-<!--            ( #{menuId}, #{optionId})-->
-<!--    </insert>-->
 
     <insert id="save">
         INSERT INTO
@@ -21,6 +13,7 @@
             (#{menuId}, #{optionId})
         </foreach>
     </insert>
+
     <delete id="deleteByMenuId">
         DELETE
         FROM
@@ -28,4 +21,5 @@
         WHERE
             menu_id = #{menuId}
     </delete>
+
 </mapper>

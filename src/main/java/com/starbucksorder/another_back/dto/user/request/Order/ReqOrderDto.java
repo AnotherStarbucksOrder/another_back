@@ -5,10 +5,7 @@ import com.starbucksorder.another_back.entity.Order;
 import com.starbucksorder.another_back.entity.OrderDetail;
 import com.starbucksorder.another_back.entity.User;
 import lombok.Data;
-import org.aspectj.weaver.ast.Or;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

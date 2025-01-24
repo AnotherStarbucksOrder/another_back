@@ -2,7 +2,7 @@ package com.starbucksorder.another_back.controller;
 
 import com.starbucksorder.another_back.dto.admin.request.ReqAdminSalePageDateDto;
 import com.starbucksorder.another_back.service.SalesService;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +18,20 @@ public class SalesController {
     private SalesService salesService;
 
     // NOTE: 매출 관련 컨트롤러
-    @ApiOperation(value = "매출관리에서의 전체조회")
+
+    @Operation(summary = "매출관리-전체조회")
     @GetMapping("/sales")
     public ResponseEntity<?> getSales(ReqAdminSalePageDateDto dto) {
         return ResponseEntity.ok().body(salesService.getSales(dto));
     }
 
-    @ApiOperation(value = "날짜로 조회")
+    @Operation(summary = "매출관리-날짜조회")
     @GetMapping("/sale")
     public ResponseEntity<?> getSales(String date) {
         return ResponseEntity.ok().body(salesService.getDetail(date));
     }
 
-    @ApiOperation(value = "관리자페이지 접속시 나올 대시보드 매출에관한 전체조회")
+    @Operation(summary = "매출 관련 대시보드 전체조회", description = "선택된 년도에 대한 매출 전체조회")
     @GetMapping("/sales/manage/{selectYear}/dashboard")
     public ResponseEntity<?> getStatistics(@PathVariable(required = false) String selectYear) {
         return ResponseEntity.ok().body(salesService.getStatistics(selectYear));

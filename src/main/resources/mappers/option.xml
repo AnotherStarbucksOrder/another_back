@@ -5,6 +5,18 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.OptionMapper">
 
+    <resultMap id="optionResultMap" type="com.starbucksorder.another_back.entity.Option">
+        <id property="optionId" column="option_id"/>
+        <result property="optionName" column="option_name"/>
+        <result property="optionStatus" column="option_status"/>
+        <association property="optionDetail" javaType="java.util.List" resultMap="optionDetailResultMap"/>
+    </resultMap>
+
+    <resultMap id="optionDetailResultMap" type="com.starbucksorder.another_back.entity.OptionDetail">
+        <id property="optionDetailId" column="option_detail_id"/>
+        <result property="optionDetailValue" column="option_detail_value"/>
+        <result property="optionDetailPrice" column="option_detail_price"/>
+    </resultMap>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="optionId">
         INSERT INTO
@@ -13,11 +25,6 @@
             (DEFAULT, #{optionName}, #{optionStatus}, NOW(), NOW())
     </insert>
 
-    <!--<insert id="detailSave">
-        INSERT INTO option_detail_tb (option_detail_id, option_id, option_detail_value, option_detail_price )
-        VALUES
-            (DEFAULT, #{optionId}, #{optionDetailValue}, #{optionDetailPrice})
-    </insert>-->
     <insert id="detailSave">
         INSERT INTO
             option_detail_tb
@@ -33,6 +40,7 @@
         WHERE
             option_id = #{optionId}
     </update>
+
     <update id="update">
         UPDATE
             `option_tb`
@@ -47,6 +55,7 @@
     <delete id="deleteByOptionId" statementType="CALLABLE" parameterType="java.util.Map">
         CALL ps_delete_option(#{optionId, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})
     </delete>
+
     <delete id="deleteDetailById">
         DELETE
         FROM
@@ -76,12 +85,8 @@
             ot.option_id,
             ot.option_name,
             ot.option_status
-<!--            odt.option_detail_id,-->
-<!--            odt.option_detail_value,-->
-<!--            odt.option_detail_price-->
         FROM
             option_tb ot
-<!--            LEFT OUTER JOIN option_detail_tb odt on (odt.option_id = ot.option_id)-->
         LIMIT
             #{startIndex}, #{limit}
     </select>
@@ -138,21 +143,5 @@
         WHERE
             ot.option_id = #{optionId}
     </select>
-
-
-    <resultMap id="optionResultMap" type="com.starbucksorder.another_back.entity.Option">
-        <id property="optionId" column="option_id"/>
-        <result property="optionName" column="option_name"/>
-        <result property="optionStatus" column="option_status"/>
-<!--        <result property="createDate" column="create_date"/>-->
-<!--        <result property="updateDate" column="update_date"/>-->
-        <association property="optionDetail" javaType="java.util.List" resultMap="optionDetailResultMap"/>
-    </resultMap>
-
-    <resultMap id="optionDetailResultMap" type="com.starbucksorder.another_back.entity.OptionDetail">
-        <id property="optionDetailId" column="option_detail_id"/>
-        <result property="optionDetailValue" column="option_detail_value"/>
-        <result property="optionDetailPrice" column="option_detail_price"/>
-    </resultMap>
 
 </mapper>

@@ -2,12 +2,10 @@ package com.starbucksorder.another_back.dto.admin.request.option;
 
 import com.starbucksorder.another_back.entity.Option;
 import com.starbucksorder.another_back.entity.OptionDetail;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
 public class ReqAdminOptionDto {

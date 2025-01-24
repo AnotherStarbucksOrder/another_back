@@ -5,6 +5,26 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.OrderMapper">
 
+    <resultMap id="orderResultMap" type="com.starbucksorder.another_back.entity.Order">
+        <id property="orderId" column="order_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="paymentId" column="payment_id"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="orderType" column="order_type"/>
+        <result property="orderAmount" column="order_amount"/>
+        <result property="orderState" column="order_state"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <association property="orderDetails" resultMap="orderDetailResultMap"/>
+    </resultMap>
+
+    <resultMap id="orderDetailResultMap" type="com.starbucksorder.another_back.entity.OrderDetail">
+        <id property="orderDetailId" column="order_detail_id"/>
+        <result property="menuId" column="menu_id"/>
+        <result property="quantity" column="quantity"/>
+        <result property="orderComment" column="order_comment"/>
+    </resultMap>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="orderId">
         INSERT INTO
             order_tb
@@ -61,25 +81,6 @@
             DATE(create_date) BETWEEN DATE(#{startDate}) AND DATE(#{endDate})
     </select>
 
-    <resultMap id="orderResultMap" type="com.starbucksorder.another_back.entity.Order">
-        <id property="orderId" column="order_id"/>
-        <result property="userId" column="user_id"/>
-        <result property="paymentId" column="payment_id"/>
-        <result property="paymentType" column="payment_type"/>
-        <result property="orderType" column="order_type"/>
-        <result property="orderAmount" column="order_amount"/>
-        <result property="orderState" column="order_state"/>
-        <result property="createDate" column="create_date"/>
-        <result property="updateDate" column="update_date"/>
-        <association property="orderDetails" resultMap="orderDetailResultMap"/>
-    </resultMap>
-
-    <resultMap id="orderDetailResultMap" type="com.starbucksorder.another_back.entity.OrderDetail">
-        <id property="orderDetailId" column="order_detail_id"/>
-        <result property="menuId" column="menu_id"/>
-        <result property="quantity" column="quantity"/>
-        <result property="orderComment" column="order_comment"/>
-    </resultMap>
     <select id="findOrderById" resultMap="orderResultMap">
         SELECT
             ot.order_id,
@@ -160,6 +161,7 @@
         limit
             0,5
     </select>
+
     <select id="getSale" resultType="com.starbucksorder.another_back.dto.admin.response.Sales.RespAdminSaleListDto">
         SELECT
             IF(#{dateMode}=0, DATE(create_date), date_format(create_date,'%Y-%m')) AS date,
@@ -191,6 +193,7 @@
         ORDER BY
             yearCount
     </select>
+
     <select id="totalSaleCount" resultType="java.lang.Integer">
         SELECT
             COUNT(*) AS totalCount
@@ -208,6 +211,7 @@
                 IF(#{dateMode} = 0, DATE(create_date), DATE_FORMAT(create_date, '%Y-%m'))
         ) AS subquery;
     </select>
+
     <select id="getByDate" resultType="com.starbucksorder.another_back.dto.admin.response.Sales.RespAdminSaleAndMenusDto$wtf">
 <!--        dateType = 0 월별 1 일별-->
         SELECT

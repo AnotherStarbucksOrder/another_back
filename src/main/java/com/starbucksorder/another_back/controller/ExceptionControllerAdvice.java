@@ -4,15 +4,14 @@ import com.starbucksorder.another_back.exception.BadCredentialException;
 import com.starbucksorder.another_back.exception.DuplicateNameException;
 import com.starbucksorder.another_back.exception.UserNotFoundException;
 import com.starbucksorder.another_back.exception.ValidException;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
+
     // UserNotFoundException 예외처리
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<?> notFoundBoardException(UserNotFoundException e) {

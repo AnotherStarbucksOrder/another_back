@@ -5,7 +5,6 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.CouponMapper">
 
-
     <update id="updateUseDateById" parameterType="java.util.List">
         UPDATE
             coupon_tb

@@ -11,6 +11,7 @@
         <result property="categoryStatus" column="category_status"/>
         <result property="categorySeq" column="category_seq"/>
     </resultMap>
+
     <update id="update">
         UPDATE
             category_tb
@@ -22,6 +23,7 @@
         WHERE
             category_id = #{categoryId}
     </update>
+
     <update id="updateStatus">
         UPDATE
             category_tb
@@ -70,6 +72,7 @@
         ORDER BY
             category_seq
     </select>
+
     <select id="getAllLimit" resultType="com.starbucksorder.another_back.entity.Category">
         SELECT
             category_id as categoryId,
@@ -83,6 +86,7 @@
         LIMIT
             #{startIndex}, #{limit}
     </select>
+
     <select id="getCount" resultType="java.lang.Integer">
         SELECT
             COUNT(*)
@@ -99,6 +103,7 @@
             (#{menuId},#{categoryId})
         </foreach>
     </insert>
+
     <insert id="save" parameterType="com.starbucksorder.another_back.entity.Category">
         INSERT INTO
             category_tb
@@ -113,6 +118,7 @@
         WHERE
             menu_id = #{menuId}
     </delete>
+
     <delete id="deleteById" statementType="CALLABLE" parameterType="java.util.Map">
         CALL ps_delete_category(#{categoryId, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})
     </delete>

@@ -20,7 +20,6 @@ public class RespMenuListByCategoryIdDto {
 //    private int menuPrice;
 //    private String imgUrl;
 
-    List<Menu> menus;
+    private List<Menu> menus;
     private Integer totalCount;
-
 }

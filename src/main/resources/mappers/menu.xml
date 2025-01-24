@@ -5,29 +5,6 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.MenuMapper">
 
-    <!--    메뉴 추가-->
-    <insert id="save" useGeneratedKeys="true" keyProperty="menuId">
-        INSERT INTO
-            menu_tb
-        VALUES
-            (DEFAULT, #{menuName}, #{menuPrice}, #{comment}, 1, NOW(), NOW(), #{imgUrl})
-    </insert>
-
-    <!-- 메뉴삭제    -->
-    <delete id="deleteByMenuIds" statementType="CALLABLE" parameterType="java.util.Map">
-        CALL ps_delete_menu(#{menuIds, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})
-    </delete>
-
-    <!-- 메뉴 상태 수정    -->
-    <update id="updateMenuStatus">
-        UPDATE
-            menu_tb
-        SET
-            menu_status = IF(menu_status = 1, 0, 1)
-        WHERE
-            menu_id =#{menuId}
-    </update>
-
     <resultMap id="menuResultMap" type="com.starbucksorder.another_back.entity.Menu">
         <id property="menuId" column="menu_id"/>
         <result property="menuName" column="menu_name"/>
@@ -49,8 +26,6 @@
     <resultMap id="OptionResultMap" type="com.starbucksorder.another_back.entity.Option">
         <id property="optionId" column="option_id" />
         <result property="optionName" column="option_name" />
-<!--        <result property="createDate" column="createDate" />-->
-<!--        <result property="updateDate" column="updateDate" />-->
         <collection property="optionDetail" javaType="java.util.List" resultMap="OptionDetailResultMap" />
     </resultMap>
 
@@ -61,6 +36,30 @@
         <result property="optionDetailPrice" column="option_detail_price" />
     </resultMap>
 
+    <!--메뉴 추가-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="menuId">
+        INSERT INTO
+            menu_tb
+        VALUES
+            (DEFAULT, #{menuName}, #{menuPrice}, #{comment}, 1, NOW(), NOW(), #{imgUrl})
+    </insert>
+
+    <!-- 메뉴삭제 -->
+    <delete id="deleteByMenuIds" statementType="CALLABLE" parameterType="java.util.Map">
+        CALL ps_delete_menu(#{menuIds, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})
+    </delete>
+
+    <!-- 메뉴 상태 수정 -->
+    <update id="updateMenuStatus">
+        UPDATE
+            menu_tb
+        SET
+            menu_status = IF(menu_status = 1, 0, 1)
+        WHERE
+            menu_id =#{menuId}
+    </update>
+
+
     <select id="findByMenuId" resultMap="menuResultMap">
         SELECT
             mt.menu_id,
@@ -68,19 +67,13 @@
             mt.menu_price,
             mt.comment,
             mt.menu_status,
-<!--            mt.create_date as createDate,-->
-<!--            mt.update_date as updateDate,-->
             mt.img_url,
 
             mdt.menu_detail_id,
-<!--            mdt.menu_id,-->
             mdt.option_id,
 
             ot.option_id,
             ot.option_name,
-<!--            ot.create_date as createDate,-->
-<!--            ot.update_date as updateDate,-->
-
             odt.option_detail_id,
             odt.option_detail_value,
             odt.option_detail_price
@@ -109,13 +102,13 @@
             left outer join category_tb ct on (mct.category_id = ct.category_id)
         where
             mct.category_id = #{categoryId}
-            and mt.menu_status =1
+            and mt.menu_status = 1
         order by
             mt.menu_id
         limit #{startIndex}, #{limit}
     </select>
 
-<!--    -->
+
     <select id="getCountAllBySearch" resultType="java.lang.Integer">
         select
             count(mt.menu_id) as menuId
@@ -126,38 +119,37 @@
         where
             mct.category_id = #{categoryId}
     </select>
+
     <!-- NOTE: 관리자   -->
     <select id="findByMenuName" resultMap="menuResultMap">
         SELECT
-        mt.menu_id as menuId,
-        mt.menu_name as menuName,
-        mt.menu_price as menuPrice,
-        mt.comment as comment,
-        mt.menu_status as status,
-        <!--            mt.create_date as createDate,-->
-        <!--            mt.update_date as updateDate,-->
-        mt.img_url as imgUrl,
+            mt.menu_id as menuId,
+            mt.menu_name as menuName,
+            mt.menu_price as menuPrice,
+            mt.comment as comment,
+            mt.menu_status as status,
+            mt.img_url as imgUrl,
 
-        mdt.menu_detail_id as menuDetailId,
-        mdt.menu_id as menuId,
-        mdt.option_id as optionId,
+            mdt.menu_detail_id as menuDetailId,
+            mdt.menu_id as menuId,
+            mdt.option_id as optionId,
 
-        ot.option_id as optionId,
-        ot.option_name as optionName,
-        <!--            ot.create_date as createDate,-->
-        <!--            ot.update_date as updateDate,-->
+            ot.option_id as optionId,
+            ot.option_name as optionName,
 
-        odt.option_detail_id as optionDetailId,
-        odt.option_detail_value as optionDetailValue,
-        odt.option_detail_price as optionDetailPrice
+            odt.option_detail_id as optionDetailId,
+            odt.option_detail_value as optionDetailValue,
+            odt.option_detail_price as optionDetailPrice
         FROM
-        menu_tb mt
-        LEFT OUTER JOIN menu_detail_tb mdt on (mdt.menu_id = mt.menu_id)
-        LEFT OUTER JOIN option_tb ot on (ot.option_id = mdt.option_id)
-        LEFT OUTER JOIN option_detail_tb odt on (odt.option_id = ot.option_id)
+            menu_tb mt
+            LEFT OUTER JOIN menu_detail_tb mdt on (mdt.menu_id = mt.menu_id)
+            LEFT OUTER JOIN option_tb ot on (ot.option_id = mdt.option_id)
+            LEFT OUTER JOIN option_detail_tb odt on (odt.option_id = ot.option_id)
+
         WHERE
-        mt.menu_name = #{menuName}
+            mt.menu_name = #{menuName}
     </select>
+
     <!-- 관리자 메뉴 상세보기    -->
     <select id="menuDetailByMenuId" resultType="com.starbucksorder.another_back.entity.Menu">
         SELECT

@@ -1,50 +1,21 @@
 spring:
   profiles:
-    active: local # ??? ??
-    group:
-      local: local_server, common, secret
-      blue: blue_server, common, secret
-      green: green_server, common, secret
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-# ? ??? ??
----
+    active: secret
+  jpa:
+    hibernate:
+      ddl-auto: none
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true
 
-spring:
-  config:
-    activate:
-      on-profile: local_server
-server:
-  port: 8080
-client:
-  address: http://localhost:3000 # ?? ?? ? ??? ??
----
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
 
-spring:
-  config:
-    activate:
-      on-profile: blue_server
-server:
-  port: 8080
-client:
-  address: http://localhost:3000
----
-
-spring:
-  config:
-    activate:
-      on-profile: green_server
-server:
-  port: 9090
-client:
-  address: http://localhost:3000
----
-# ??? ?? ??
-spring:
-  config:
-    activate:
-      on-profile: common
 mybatis:
   mapper-locations:
-    - mappers/*.xml
+    - classpath:mappers/*.xml
+

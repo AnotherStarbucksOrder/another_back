@@ -5,6 +5,19 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.MenuCategoryMapper">
 
+    <resultMap id="categoryResultMap" type="com.starbucksorder.another_back.entity.Category">
+        <id property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryStatus" column="category_status"/>
+        <result property="categorySeq" column="category_seq"/>
+        <association property="menuList" javaType="java.util.List" resultMap="menuResultMap"/>
+    </resultMap>
+
+    <resultMap id="menuResultMap" type="com.starbucksorder.another_back.entity.Menu">
+        <id property="menuId" column="menu_id"/>
+        <result property="menuName" column="menu_name"/>
+    </resultMap>
+
     <insert id="save">
         INSERT INTO
             menu_category_tb
@@ -21,19 +34,6 @@
         WHERE
             category_id = #{categoryId}
     </delete>
-
-    <resultMap id="categoryResultMap" type="com.starbucksorder.another_back.entity.Category">
-        <id property="categoryId" column="category_id"/>
-        <result property="categoryName" column="category_name"/>
-        <result property="categoryStatus" column="category_status"/>
-        <result property="categorySeq" column="category_seq"/>
-        <association property="menuList" javaType="java.util.List" resultMap="menuResultMap"/>
-    </resultMap>
-
-    <resultMap id="menuResultMap" type="com.starbucksorder.another_back.entity.Menu">
-        <id property="menuId" column="menu_id"/>
-        <result property="menuName" column="menu_name"/>
-    </resultMap>
 
     <select id="findAllByCategoryId" resultMap="categoryResultMap">
         SELECT

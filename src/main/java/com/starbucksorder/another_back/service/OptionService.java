@@ -29,7 +29,7 @@ public class OptionService {
 
     // 옵션 추가
     @Transactional(rollbackFor = SQLException.class)
-    public boolean add(ReqAdminOptionDto dto) {
+    public boolean addOption(ReqAdminOptionDto dto) {
         // 중복검사
         duplicateService.isDuplicateName("option", dto.getOptionName());
         Option option = dto.toEntity();
@@ -52,7 +52,7 @@ public class OptionService {
     }
 
     // 옵션 전체 불러오기
-    public CMRespAdminDto getAll(ReqAdminPageAndLimitDto dto) {
+    public CMRespAdminDto getAllOptions(ReqAdminPageAndLimitDto dto) {
         Long startIndex = (dto.getPage() - 1) * dto.getLimit();
         List<RespAdminOptionDto> respAdminOptionDtos = optionMapper.getAll(startIndex, dto.getLimit()).stream().map(Option::toOptionAllDto).collect(Collectors.toList());
         return new CMRespAdminDto(optionMapper.getCount(), respAdminOptionDtos);

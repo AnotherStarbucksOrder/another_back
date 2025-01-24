@@ -16,10 +16,7 @@ public class ReqMenuDto {
 
     public Menu toEntity() {
         return Menu.builder()
-//                .categoryName(categoryName)
                 .menuStatus(status)
-//                .createDate(createDate)
-//                .updateDate(updateDate)
                 .build();
     }
 }

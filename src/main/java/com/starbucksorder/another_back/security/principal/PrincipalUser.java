@@ -8,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,7 @@ public class PrincipalUser implements UserDetails {
     private String username;
     private String password;
     private Set<UserRoles> userRoles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // 권한 로직구현

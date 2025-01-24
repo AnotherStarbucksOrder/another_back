@@ -67,7 +67,7 @@ public class MenuService {
 //        return list;
 //    }
 
-    //  카테고리별 메뉴리스트 종류 -> 24개씩
+    //  카테고리별 메뉴리스트 종류 -> 9개씩
     public RespMenuListByCategoryIdDto getMenuList(ReqMenuListDto dto) {
         Long startIndex = (dto.getPage() - 1) * dto.getLimit();
         List<Menu> menuLists = menuMapper.findAllByStartIndexAndLimit(dto.getCategoryId(), startIndex, dto.getLimit());
