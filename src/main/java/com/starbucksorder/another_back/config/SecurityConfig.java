@@ -21,8 +21,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtFilter jwtFilter;
+
     @Autowired
-    private AuthenticationHandler AuthenticationHandler;
+    private AuthenticationHandler authenticationHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,29 +35,28 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(configurationSource()))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
-                        .requestMatchers("/auth/signin","/home/**","/category/**","/menu/**").permitAll()
+                        .requestMatchers("/auth/signin", "/home/**", "/category/**", "/menu/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // user가 돌기전에 jwtFilter 돌겠다
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(AuthenticationHandler));
-        return http.build(); // 위 설정 기반으로 만들어줌
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationHandler));
+
+        return http.build();
     }
 
     @Bean
     public CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedHeader("*");
         configuration.addAllowedOrigin("*");
-//        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
-
-
-
 
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
@@ -85,4 +85,6 @@ public class SecurityConfig {
 //        // username~ 전에 jwtFilter가 돌게
 //        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 //    }
+
 }
+

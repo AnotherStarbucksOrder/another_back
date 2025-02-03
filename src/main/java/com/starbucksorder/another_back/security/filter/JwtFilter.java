@@ -33,12 +33,10 @@ public class JwtFilter extends OncePerRequestFilter {
         // 우리 토큰이 제대로 되있는건지 확인만 해주면 됨
         String requestURI = request.getRequestURI().toString();
         List<String> permitAllUrls = List.of(
-                "/menu",
-                "/user",
-                "/category",
-                "/home",
-                "/error"
+                "/menu", "/user", "/category", "/home", "/error",
+                "/swagger-ui", "/v3/api-docs", "/swagger-resources", "/webjars"
         );
+
         if (permitAllUrls.contains(requestURI.substring(0, requestURI.indexOf("/", 1) != -1 ? requestURI.indexOf("/", 1) : requestURI.length()))) {
             filterChain.doFilter(request, response);
             return;
@@ -47,7 +45,6 @@ public class JwtFilter extends OncePerRequestFilter {
         String bearerToken = request.getHeader("Authorization");
         // 토큰 검사
         if(bearerToken == null || bearerToken.isBlank()) {
-            System.out.println("여기냐");
             filterChain.doFilter(request, response); // 다음 필터로 넘기는거
             return;
         }
