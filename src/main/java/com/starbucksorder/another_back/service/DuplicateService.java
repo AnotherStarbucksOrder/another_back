@@ -2,41 +2,30 @@ package com.starbucksorder.another_back.service;
 
 import com.starbucksorder.another_back.aspect.LogAspect;
 import com.starbucksorder.another_back.aspect.annotation.Log;
-import com.starbucksorder.another_back.entity.Option;
 import com.starbucksorder.another_back.exception.DuplicateNameException;
+import com.starbucksorder.another_back.mapper.MenuMapper;
 import com.starbucksorder.another_back.repository.CategoryMapper;
-import com.starbucksorder.another_back.repository.MenuMapper;
 import com.starbucksorder.another_back.repository.OptionMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class DuplicateService {
-    @Autowired
-    private OptionMapper optionMapper;
-    @Autowired
-    private MenuMapper menuMapper;
-    @Autowired
-    private CategoryMapper categoryMapper;
-    @Autowired
-    private LogAspect logAspect;
+
+    private final OptionMapper optionMapper;
+    private final MenuMapper menuMapper;
+    private final CategoryMapper categoryMapper;
+    private final LogAspect logAspect;
 
     @Log
     public boolean isDuplicateName(String mapperName, String name) {
-        boolean isDuplicate;
-        switch (mapperName) {
-            case "menu":
-                isDuplicate = menuMapper.findByMenuName(name) != null;
-                break;
-            case "category":
-                isDuplicate = categoryMapper.findByCategoryName(name) != null;
-                break;
-            case "option":
-                isDuplicate = optionMapper.findByOptionName(name) != null;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid mapper name");
-        }
+        boolean isDuplicate = switch (mapperName) {
+            case "menu" -> menuMapper.findByMenuName(name) != null;
+            case "category" -> categoryMapper.findByCategoryName(name) != null;
+            case "option" -> optionMapper.findByOptionName(name) != null;
+            default -> throw new IllegalArgumentException("Invalid mapper name");
+        };
         if (isDuplicate) {
             throw new DuplicateNameException(name + " is Duplicate By " + mapperName);
         }

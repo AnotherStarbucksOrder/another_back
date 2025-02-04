@@ -8,6 +8,9 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
+
 
 springdoc:
   api-docs:

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.starbucksorder.another_back.repository.MenuMapper">
+<mapper namespace="com.starbucksorder.another_back.mapper.MenuMapper">
 
     <resultMap id="menuResultMap" type="com.starbucksorder.another_back.entity.Menu">
         <id property="menuId" column="menu_id"/>
@@ -35,29 +35,6 @@
         <result property="optionDetailValue" column="option_detail_value" />
         <result property="optionDetailPrice" column="option_detail_price" />
     </resultMap>
-
-    <!--메뉴 추가-->
-    <insert id="save" useGeneratedKeys="true" keyProperty="menuId">
-        INSERT INTO
-            menu_tb
-        VALUES
-            (DEFAULT, #{menuName}, #{menuPrice}, #{comment}, 1, NOW(), NOW(), #{imgUrl})
-    </insert>
-
-    <!-- 메뉴삭제 -->
-    <delete id="deleteByMenuIds" statementType="CALLABLE" parameterType="java.util.Map">
-        CALL ps_delete_menu(#{menuIds, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})
-    </delete>
-
-    <!-- 메뉴 상태 수정 -->
-    <update id="updateMenuStatus">
-        UPDATE
-            menu_tb
-        SET
-            menu_status = IF(menu_status = 1, 0, 1)
-        WHERE
-            menu_id =#{menuId}
-    </update>
 
 
     <select id="findByMenuId" resultMap="menuResultMap">
@@ -265,17 +242,32 @@
         </foreach>
 
     </select>
-    <update id="update">
-        UPDATE
-            menu_tb
-        SET
-            menu_name = #{menuName},
-            menu_price = #{menuPrice},
-            img_url = #{imgUrl},
-            comment = #{comment},
-            update_date = now()
-        WHERE
-            menu_id = #{menuId}
-    </update>
+
+<!--        <delete id="deleteByMenuIds" statementType="CALLABLE" parameterType="java.util.Map">-->
+<!--        CALL ps_delete_menu(#{menuIds, mode=IN}, #{successCount, mode=OUT, jdbcType=INTEGER})-->
+<!--        </delete>-->
+
+<!--        <update id="updateMenuStatus">-->
+<!--             UPDATE-->
+<!--                menu_tb-->
+<!--            SET-->
+<!--                menu_status = IF(menu_status = 1, 0, 1)-->
+<!--            WHERE-->
+<!--                menu_id =#{menuId}-->
+<!--        </update>-->
+
+<!--        <update id="update">-->
+<!--            UPDATE-->
+<!--                menu_tb-->
+<!--            SET-->
+<!--                menu_name = #{menuName},-->
+<!--                menu_price = #{menuPrice},-->
+<!--                img_url = #{imgUrl},-->
+<!--                comment = #{comment},-->
+<!--                update_date = now()-->
+<!--            WHERE-->
+<!--                menu_id = #{menuId}-->
+<!--        </update>-->
+
 
 </mapper>

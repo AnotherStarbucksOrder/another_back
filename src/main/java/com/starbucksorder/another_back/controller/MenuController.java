@@ -11,19 +11,18 @@ import com.starbucksorder.another_back.service.DuplicateService;
 import com.starbucksorder.another_back.service.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
+@RequiredArgsConstructor
 @RestController
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
-    @Autowired
-    private DuplicateService duplicateService;
+    private final MenuService menuService;
+    private final DuplicateService duplicateService;
 
     @Operation(summary = "사용자 메뉴리스트 불러오기", description = " 12개씩 메뉴리스트 불러오기")
     @GetMapping("/home/category/menus")
