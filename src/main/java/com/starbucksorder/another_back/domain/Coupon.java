@@ -1,4 +1,4 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.starbucksorder.another_back.dto.user.response.point.RespUserDto;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,7 @@ public class Coupon {
     private Long userId;
     private String couponName;
     private LocalDateTime registerDate;
+
     private LocalDateTime useDate;
 
     public RespUserDto.RespCouponDto toCouponDto() {

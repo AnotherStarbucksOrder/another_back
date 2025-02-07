@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.admin.request.menu;
 
-import com.starbucksorder.another_back.entity.Menu;
+import com.starbucksorder.another_back.entity.MenuJpaEntity;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,12 +23,13 @@ public class ReqAdminDto {
     private List<Long> optionIds;
     private List<Long> categories;
 
-    public Menu toMenuEntity() {
-        return Menu.builder()
+    // 메뉴 추가 메서드
+    public MenuJpaEntity toMenuEntity() {
+        return MenuJpaEntity.builder()
                 .menuName(menuName)
                 .menuPrice(menuPrice)
                 .comment(comment)
-                .menuStatus(menuStatus)
+                .menuStatus(menuStatus != null ? menuStatus : 1L)
                 .imgUrl(imgUrl)
                 .build();
     }

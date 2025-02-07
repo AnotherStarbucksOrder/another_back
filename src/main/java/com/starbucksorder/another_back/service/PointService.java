@@ -1,8 +1,7 @@
 package com.starbucksorder.another_back.service;
 
 import com.starbucksorder.another_back.dto.user.response.point.RespUserDto;
-import com.starbucksorder.another_back.entity.User;
-import com.starbucksorder.another_back.exception.UserNotFoundException;
+import com.starbucksorder.another_back.domain.User;
 import com.starbucksorder.another_back.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

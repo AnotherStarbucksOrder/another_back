@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.admin.request;
 
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;

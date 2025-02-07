@@ -1,7 +1,6 @@
 package com.starbucksorder.another_back.repository;
 
-import com.starbucksorder.another_back.dto.user.response.point.RespUserDto;
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

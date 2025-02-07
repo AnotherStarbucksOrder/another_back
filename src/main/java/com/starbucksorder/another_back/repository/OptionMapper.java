@@ -1,15 +1,12 @@
 package com.starbucksorder.another_back.repository;
 
-import com.starbucksorder.another_back.entity.Menu;
-import com.starbucksorder.another_back.entity.Option;
-import com.starbucksorder.another_back.entity.OptionDetail;
+import com.starbucksorder.another_back.domain.Menu;
+import com.starbucksorder.another_back.domain.Option;
+import com.starbucksorder.another_back.domain.OptionDetail;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Mapper
 public interface OptionMapper {

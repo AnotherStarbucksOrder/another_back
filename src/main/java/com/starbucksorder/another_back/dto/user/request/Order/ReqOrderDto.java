@@ -1,9 +1,9 @@
 package com.starbucksorder.another_back.dto.user.request.Order;
 
-import com.starbucksorder.another_back.entity.Coupon;
-import com.starbucksorder.another_back.entity.Order;
-import com.starbucksorder.another_back.entity.OrderDetail;
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.Coupon;
+import com.starbucksorder.another_back.domain.Order;
+import com.starbucksorder.another_back.domain.OrderDetail;
+import com.starbucksorder.another_back.domain.User;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;

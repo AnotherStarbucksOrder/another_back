@@ -1,4 +1,4 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.starbucksorder.another_back.dto.admin.response.user.RespAdminDto;
 import com.starbucksorder.another_back.dto.user.response.point.RespUserDto;
@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class User {
 
     private Long userId;
@@ -23,7 +22,6 @@ public class User {
     private int starCount;
     private LocalDateTime registerDate;
     private LocalDateTime updateDate;
-
     private List<Coupon> coupons;
 
     public RespUserDto toRespUserDto() {
@@ -31,7 +29,7 @@ public class User {
                 .userId(userId)
                 .phoneNumber(phoneNumber)
                 .starCount(starCount)
-                .Coupons(coupons.stream().map(Coupon::toCouponDto).collect(Collectors.toList()))
+                .Coupons(coupons.stream().map(Coupon::toCouponDto).toList())
                 .build();
     }
 

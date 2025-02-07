@@ -1,4 +1,4 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.starbucksorder.another_back.dto.admin.response.order.RespOrderDetailDto;
 import lombok.AllArgsConstructor;
@@ -6,12 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class OrderDetail {
-
     private Long orderDetailId;
     private Long orderId;
     private Long menuId;

@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.admin.request.category;
 
-import com.starbucksorder.another_back.entity.Category;
+import com.starbucksorder.another_back.domain.Category;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

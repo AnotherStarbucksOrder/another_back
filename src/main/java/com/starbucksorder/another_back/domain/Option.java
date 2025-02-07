@@ -1,4 +1,4 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starbucksorder.another_back.dto.admin.response.menu.RespAdminOptions;
@@ -10,21 +10,22 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Option {
+
     private Long optionId;
     private String optionName;
     private Long optionStatus;
+
     @JsonIgnore
     private LocalDateTime createDate;
+
     @JsonIgnore
     private LocalDateTime updateDate;
-
 
     private List<OptionDetail> optionDetail; // optionDetail : option = many : 1
 

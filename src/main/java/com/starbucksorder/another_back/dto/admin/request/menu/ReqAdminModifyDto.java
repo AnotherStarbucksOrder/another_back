@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.admin.request.menu;
 
-import com.starbucksorder.another_back.entity.Menu;
+import com.starbucksorder.another_back.domain.Menu;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

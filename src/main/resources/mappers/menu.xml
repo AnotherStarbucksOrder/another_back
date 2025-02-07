@@ -5,7 +5,7 @@
 
 <mapper namespace="com.starbucksorder.another_back.mapper.MenuMapper">
 
-    <resultMap id="menuResultMap" type="com.starbucksorder.another_back.entity.Menu">
+    <resultMap id="menuResultMap" type="com.starbucksorder.another_back.domain.Menu">
         <id property="menuId" column="menu_id"/>
         <result property="menuName" column="menu_name"/>
         <result property="menuPrice" column="menu_price"/>
@@ -17,19 +17,19 @@
         <collection property="menuDetails" javaType="java.util.List" resultMap="menuDetailResultMap" />
     </resultMap>
 
-    <resultMap id="menuDetailResultMap" type="com.starbucksorder.another_back.entity.MenuDetail">
+    <resultMap id="menuDetailResultMap" type="com.starbucksorder.another_back.domain.MenuDetail">
         <id property="menuDetailId" column="menu_detail_id" />
         <result property="optionId" column="option_id" />
         <association property="option" resultMap="OptionResultMap" />
     </resultMap>
 
-    <resultMap id="OptionResultMap" type="com.starbucksorder.another_back.entity.Option">
+    <resultMap id="OptionResultMap" type="com.starbucksorder.another_back.domain.Option">
         <id property="optionId" column="option_id" />
         <result property="optionName" column="option_name" />
         <collection property="optionDetail" javaType="java.util.List" resultMap="OptionDetailResultMap" />
     </resultMap>
 
-    <resultMap id="OptionDetailResultMap" type="com.starbucksorder.another_back.entity.OptionDetail">
+    <resultMap id="OptionDetailResultMap" type="com.starbucksorder.another_back.domain.OptionDetail">
         <id property="optionDetailId" column="option_detail_id" />
         <result property="optionId" column="optionId" />
         <result property="optionDetailValue" column="option_detail_value" />
@@ -63,7 +63,7 @@
             mt.menu_id = #{menuId}
     </select>
 
-    <select id="findAllByStartIndexAndLimit" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="findAllByStartIndexAndLimit" resultType="com.starbucksorder.another_back.domain.Menu">
         select
             mt.menu_id as menuId,
             mt.menu_name as menuName,
@@ -128,7 +128,7 @@
     </select>
 
     <!-- 관리자 메뉴 상세보기    -->
-    <select id="menuDetailByMenuId" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="menuDetailByMenuId" resultType="com.starbucksorder.another_back.domain.Menu">
         SELECT
             mt.menu_id AS menuId,
             mt.menu_name AS menuName,
@@ -151,7 +151,7 @@
             mt.menu_id
     </select>
     <!-- 메뉴 전체조회    -->
-    <select id="getMenuList" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="getMenuList" resultType="com.starbucksorder.another_back.domain.Menu">
         SELECT
             menu_id as menuId,
             menu_name as menuName,
@@ -193,7 +193,7 @@
     </select>
 
     <!-- 관리자 메뉴 검색 및 페이지 조회   -->
-    <select id="getMenuListPageByName" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="getMenuListPageByName" resultType="com.starbucksorder.another_back.domain.Menu">
         SELECT
             mt.menu_id AS menuId,
             mt.menu_name AS menuName,
@@ -219,7 +219,7 @@
     </select>
 
 
-    <select id="getOptionList" resultType="com.starbucksorder.another_back.entity.Option">
+    <select id="getOptionList" resultType="com.starbucksorder.another_back.domain.Option">
         SELECT
             option_id AS optionId,
             option_name AS optionName
@@ -228,7 +228,7 @@
         WHERE
             1 = 1
     </select>
-    <select id="findByMenuIds" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="findByMenuIds" resultType="com.starbucksorder.another_back.domain.Menu">
         SELECT
             menu_id AS menuId,
             menu_name AS menuName,

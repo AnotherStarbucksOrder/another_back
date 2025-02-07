@@ -1,4 +1,4 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starbucksorder.another_back.security.principal.PrincipalUser;
@@ -15,11 +15,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Admin {
+
     private Long adminId;
     private String username;
     @JsonIgnore
     private String password;
+    @JsonIgnore
     private LocalDateTime registerDate;
+
+    @JsonIgnore
     private LocalDateTime updateDate;
     private Set<UserRoles> userRoles;
 

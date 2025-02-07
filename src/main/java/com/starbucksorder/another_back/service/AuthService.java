@@ -1,10 +1,8 @@
 package com.starbucksorder.another_back.service;
 
 import com.starbucksorder.another_back.aspect.LogAspect;
-import com.starbucksorder.another_back.aspect.annotation.Log;
 import com.starbucksorder.another_back.dto.admin.request.ReqSigninDto;
-import com.starbucksorder.another_back.entity.Admin;
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.Admin;
 import com.starbucksorder.another_back.exception.AccessTokenValidException;
 import com.starbucksorder.another_back.exception.BadCredentialException;
 import com.starbucksorder.another_back.repository.AdminMapper;

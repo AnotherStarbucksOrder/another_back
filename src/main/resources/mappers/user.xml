@@ -5,7 +5,7 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.UserMapper">
 
-    <resultMap id="userResultMap" type="com.starbucksorder.another_back.entity.User">
+    <resultMap id="userResultMap" type="com.starbucksorder.another_back.domain.User">
         <id property="userId" column="user_id"/>
         <result property="phoneNumber" column="phone_number"/>
         <result property="memo" column="memo"/>
@@ -15,7 +15,7 @@
         <association property="coupons" resultMap="couponResultMap"/>
     </resultMap>
 
-    <resultMap id="couponResultMap" type="com.starbucksorder.another_back.entity.Coupon">
+    <resultMap id="couponResultMap" type="com.starbucksorder.another_back.domain.Coupon">
         <id property="couponId" column="coupon_id"/>
         <result property="userId" column="user_id"/>
         <result property="couponName" column="coupon_name"/>
@@ -52,7 +52,7 @@
         </foreach>
     </delete>
 
-    <update id="updateStar" statementType="CALLABLE" parameterType="com.starbucksorder.another_back.entity.User">
+    <update id="updateStar" statementType="CALLABLE" parameterType="com.starbucksorder.another_back.domain.User">
         call ps_generate_coupon(#{userId, mode=IN}, #{starCount, mode=IN})
     </update>
 
@@ -98,7 +98,7 @@
             AND ct.use_date IS NULL
     </select>
 
-    <select id="findUserByUserId" resultType="com.starbucksorder.another_back.entity.User">
+    <select id="findUserByUserId" resultType="com.starbucksorder.another_back.domain.User">
         SELECT
             user_id as userId,
             phone_number as phoneNumber,
@@ -125,7 +125,7 @@
         </where>
     </select>
 
-    <select id="getUserAll" resultType="com.starbucksorder.another_back.entity.User">
+    <select id="getUserAll" resultType="com.starbucksorder.another_back.domain.User">
         SELECT
             user_id AS userId,
             phone_number AS phoneNumber,

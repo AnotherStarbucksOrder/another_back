@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.security.filter;
 
-import com.starbucksorder.another_back.entity.Admin;
+import com.starbucksorder.another_back.domain.Admin;
 import com.starbucksorder.another_back.repository.AdminMapper;
 import com.starbucksorder.another_back.security.jwt.JwtProvider;
 import com.starbucksorder.another_back.security.principal.PrincipalUser;

@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.user.response.menu;
 
-import com.starbucksorder.another_back.entity.Menu;
+import com.starbucksorder.another_back.domain.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

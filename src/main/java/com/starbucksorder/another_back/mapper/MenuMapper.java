@@ -1,7 +1,7 @@
 package com.starbucksorder.another_back.mapper;
 
-import com.starbucksorder.another_back.entity.Menu;
-import com.starbucksorder.another_back.entity.Option;
+import com.starbucksorder.another_back.domain.Menu;
+import com.starbucksorder.another_back.domain.Option;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

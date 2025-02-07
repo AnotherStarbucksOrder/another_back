@@ -1,15 +1,11 @@
 package com.starbucksorder.another_back.dto.user.response.menu;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.starbucksorder.another_back.entity.Menu;
-import com.starbucksorder.another_back.entity.MenuDetail;
-import com.starbucksorder.another_back.entity.Option;
+import com.starbucksorder.another_back.domain.MenuDetail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.Map;
 
 
 @Builder

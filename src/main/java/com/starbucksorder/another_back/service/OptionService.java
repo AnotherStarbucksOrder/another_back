@@ -5,9 +5,9 @@ import com.starbucksorder.another_back.dto.admin.request.option.ReqAdminOptionDt
 import com.starbucksorder.another_back.dto.admin.response.CMRespAdminDto;
 import com.starbucksorder.another_back.dto.admin.response.option.RespAdminOptionDto;
 import com.starbucksorder.another_back.dto.user.response.menu.RespOnlyMenuIdAdnName;
-import com.starbucksorder.another_back.entity.Menu;
-import com.starbucksorder.another_back.entity.Option;
-import com.starbucksorder.another_back.entity.OptionDetail;
+import com.starbucksorder.another_back.domain.Menu;
+import com.starbucksorder.another_back.domain.Option;
+import com.starbucksorder.another_back.domain.OptionDetail;
 import com.starbucksorder.another_back.repository.OptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

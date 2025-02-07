@@ -4,9 +4,8 @@ import com.starbucksorder.another_back.dto.admin.response.Sales.RespAdminDashBoa
 import com.starbucksorder.another_back.dto.admin.response.Sales.RespAdminSaleAndMenusDto;
 import com.starbucksorder.another_back.dto.admin.response.Sales.RespAdminSaleListDto;
 import com.starbucksorder.another_back.dto.admin.response.Sales.RespSaleDto;
-import com.starbucksorder.another_back.entity.Order;
+import com.starbucksorder.another_back.domain.Order;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.time.Year;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.starbucksorder.another_back.repository;
 
-import com.starbucksorder.another_back.entity.Category;
-import com.starbucksorder.another_back.entity.Menu;
+import com.starbucksorder.another_back.domain.Category;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

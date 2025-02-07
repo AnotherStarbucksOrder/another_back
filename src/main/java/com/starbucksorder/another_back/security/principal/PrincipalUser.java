@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.security.principal;
 
-import com.starbucksorder.another_back.entity.UserRoles;
+import com.starbucksorder.another_back.domain.UserRoles;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

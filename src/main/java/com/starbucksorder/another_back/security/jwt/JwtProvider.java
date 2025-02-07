@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.security.jwt;
 
-import com.starbucksorder.another_back.entity.Admin;
+import com.starbucksorder.another_back.domain.Admin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;

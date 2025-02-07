@@ -1,6 +1,5 @@
 package com.starbucksorder.another_back.service;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.starbucksorder.another_back.dto.admin.ReqAdminPageAndLimitDto;
 import com.starbucksorder.another_back.dto.admin.request.category.ReqAdminCategoryDto;
 import com.starbucksorder.another_back.dto.admin.request.category.ReqAdminIncludeMenuByCategoryDto;
@@ -9,8 +8,8 @@ import com.starbucksorder.another_back.dto.admin.response.category.RespAdminCate
 import com.starbucksorder.another_back.dto.admin.response.category.RespAdminOneItems;
 import com.starbucksorder.another_back.dto.user.response.category.RespCategoryDto;
 import com.starbucksorder.another_back.dto.user.response.menu.RespOnlyMenuIdAdnName;
-import com.starbucksorder.another_back.entity.Category;
-import com.starbucksorder.another_back.entity.Menu;
+import com.starbucksorder.another_back.domain.Category;
+import com.starbucksorder.another_back.domain.Menu;
 import com.starbucksorder.another_back.exception.DuplicateNameException;
 import com.starbucksorder.another_back.repository.CategoryMapper;
 import com.starbucksorder.another_back.repository.MenuCategoryMapper;

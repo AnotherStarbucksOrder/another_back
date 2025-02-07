@@ -1,6 +1,6 @@
 package com.starbucksorder.another_back.dto.admin.request.order;
 
-import com.starbucksorder.another_back.entity.Order;
+import com.starbucksorder.another_back.domain.Order;
 import lombok.Data;
 
 @Data

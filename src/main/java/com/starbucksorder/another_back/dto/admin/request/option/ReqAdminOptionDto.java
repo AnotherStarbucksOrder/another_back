@@ -1,7 +1,7 @@
 package com.starbucksorder.another_back.dto.admin.request.option;
 
-import com.starbucksorder.another_back.entity.Option;
-import com.starbucksorder.another_back.entity.OptionDetail;
+import com.starbucksorder.another_back.domain.Option;
+import com.starbucksorder.another_back.domain.OptionDetail;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

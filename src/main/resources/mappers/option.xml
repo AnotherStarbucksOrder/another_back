@@ -5,14 +5,14 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.OptionMapper">
 
-    <resultMap id="optionResultMap" type="com.starbucksorder.another_back.entity.Option">
+    <resultMap id="optionResultMap" type="com.starbucksorder.another_back.domain.Option">
         <id property="optionId" column="option_id"/>
         <result property="optionName" column="option_name"/>
         <result property="optionStatus" column="option_status"/>
         <association property="optionDetail" javaType="java.util.List" resultMap="optionDetailResultMap"/>
     </resultMap>
 
-    <resultMap id="optionDetailResultMap" type="com.starbucksorder.another_back.entity.OptionDetail">
+    <resultMap id="optionDetailResultMap" type="com.starbucksorder.another_back.domain.OptionDetail">
         <id property="optionDetailId" column="option_detail_id"/>
         <result property="optionDetailValue" column="option_detail_value"/>
         <result property="optionDetailPrice" column="option_detail_price"/>
@@ -112,7 +112,7 @@
     </select>
 
 
-    <select id="getAllByOptionId" resultType="com.starbucksorder.another_back.entity.Menu">
+    <select id="getAllByOptionId" resultType="com.starbucksorder.another_back.domain.Menu">
         SELECT
             mdt.menu_id as menuId,
             mt.menu_name as menuName

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.OrderMapper">
 
-    <resultMap id="orderResultMap" type="com.starbucksorder.another_back.entity.Order">
+    <resultMap id="orderResultMap" type="com.starbucksorder.another_back.domain.Order">
         <id property="orderId" column="order_id"/>
         <result property="userId" column="user_id"/>
         <result property="paymentId" column="payment_id"/>
@@ -18,7 +18,7 @@
         <association property="orderDetails" resultMap="orderDetailResultMap"/>
     </resultMap>
 
-    <resultMap id="orderDetailResultMap" type="com.starbucksorder.another_back.entity.OrderDetail">
+    <resultMap id="orderDetailResultMap" type="com.starbucksorder.another_back.domain.OrderDetail">
         <id property="orderDetailId" column="order_detail_id"/>
         <result property="menuId" column="menu_id"/>
         <result property="quantity" column="quantity"/>
@@ -49,7 +49,7 @@
             user_id = #{userId}
     </select>
 
-    <select id="findByDate" resultType="com.starbucksorder.another_back.entity.Order">
+    <select id="findByDate" resultType="com.starbucksorder.another_back.domain.Order">
         SELECT
             order_id AS orderId,
             user_id AS userId,

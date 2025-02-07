@@ -5,26 +5,26 @@
 
 <mapper namespace="com.starbucksorder.another_back.repository.AdminMapper">
 
-    <resultMap id="adminResultMap" type="com.starbucksorder.another_back.entity.Admin">
+    <resultMap id="adminResultMap" type="com.starbucksorder.another_back.domain.Admin">
         <id column="admin_id" property="adminId"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="register_date" property="registerDate"/>
         <result column="update_date" property="updateDate"/>
         <collection property="userRoles" javaType="java.util.Set" resultMap="userRoleResultMap"/>
-
     </resultMap>
-    <resultMap id="userRoleResultMap" type="com.starbucksorder.another_back.entity.UserRoles">
+
+    <resultMap id="userRoleResultMap" type="com.starbucksorder.another_back.domain.UserRoles">
         <id column="user_role_id" property="userRoleId"/>
         <result column="urt_user_id" property="userId"/>
         <result column="urt_role_id" property="roleId"/>
         <association property="role" resultMap="roleResultMap" />
     </resultMap>
-    <resultMap id="roleResultMap" type="com.starbucksorder.another_back.entity.Role">
+
+    <resultMap id="roleResultMap" type="com.starbucksorder.another_back.domain.Role">
         <id column="rt_role_id" property="roleId"/>
         <result column="role_name" property="name"/>
     </resultMap>
-
 
     <select id="findById" resultMap="adminResultMap">
         SELECT

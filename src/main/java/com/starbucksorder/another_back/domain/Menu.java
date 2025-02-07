@@ -1,59 +1,32 @@
-package com.starbucksorder.another_back.entity;
+package com.starbucksorder.another_back.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.starbucksorder.another_back.dto.admin.request.menu.ReqAdminModifyDto;
 import com.starbucksorder.another_back.dto.admin.response.menu.MenuAdminDetailRespDto;
 import com.starbucksorder.another_back.dto.admin.response.menu.RespAdminMenuList;
 import com.starbucksorder.another_back.dto.user.response.menu.RespMenuImgListDto;
-import com.starbucksorder.another_back.dto.user.response.menu.RespMenuListDto;
 import com.starbucksorder.another_back.dto.user.response.menu.RespOnlyMenuIdAdnName;
-import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "menu_tb")
-@Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Menu {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "menu_id", nullable = false)
     private Long menuId;
-
-    @Column(name = "menu_name", nullable = false)
     private String menuName;
-
-    @Column(name = "menu_price", nullable = false)
     private int menuPrice;
-
-    @Column(name = "comment", nullable = false)
     private String comment;
-
-    @Column(name = "menu_status", nullable = false)
     private Long menuStatus;
-
-    @CreatedDate
-    @Column(name = "create_date", updatable = false)
     @JsonIgnore
-    private Date createDate;
-
-    @LastModifiedDate
-    @Column(name = "update_date")
+    private LocalDateTime createDate;
     @JsonIgnore
-    private Date updateDate;
-
-    @Column(name = "img_url")
+    private LocalDateTime updateDate;
     private String imgUrl;
 
-    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private List<MenuDetail> menuDetails; // menu : menudetail = 1 : many
 
     private String categories;
@@ -98,14 +71,6 @@ public class Menu {
                 .options(options)
                 .categories(categories)
                 .build();
-    }
-
-    // 메뉴 업데이트
-    public void  updateMenu(ReqAdminModifyDto dto) {
-        this.menuName = dto.getMenuName();
-        this.menuPrice = dto.getMenuPrice();
-        this.comment = dto.getComment();
-        this.imgUrl = dto.getImgUrl();
     }
 
 

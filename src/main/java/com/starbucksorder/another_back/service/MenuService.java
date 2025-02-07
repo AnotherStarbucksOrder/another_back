@@ -13,10 +13,11 @@ import com.starbucksorder.another_back.dto.user.response.menu.RespMenuDto;
 import com.starbucksorder.another_back.dto.user.response.menu.RespMenuImgListDto;
 import com.starbucksorder.another_back.dto.user.response.menu.RespOnlyMenuIdAdnName;
 import com.starbucksorder.another_back.dto.user.response.menu.RespMenuListByCategoryIdDto;
-import com.starbucksorder.another_back.entity.Category;
-import com.starbucksorder.another_back.entity.Menu;
-import com.starbucksorder.another_back.entity.MenuDetail;
-import com.starbucksorder.another_back.entity.Option;
+import com.starbucksorder.another_back.domain.Category;
+import com.starbucksorder.another_back.domain.Menu;
+import com.starbucksorder.another_back.domain.MenuDetail;
+import com.starbucksorder.another_back.domain.Option;
+import com.starbucksorder.another_back.entity.MenuJpaEntity;
 import com.starbucksorder.another_back.exception.DuplicateNameException;
 import com.starbucksorder.another_back.mapper.MenuMapper;
 import com.starbucksorder.another_back.repository.CategoryMapper;
@@ -28,9 +29,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,9 +39,9 @@ public class MenuService {
     private final MenuMapper menuMapper;
     private final MenuRepository menuRepository;
 
-    @Autowired private MenuDetailMapper menuDetailMapper;
-    @Autowired private CategoryMapper categoryMapper;
-    @Autowired private DuplicateService duplicateService;
+    private final MenuDetailMapper menuDetailMapper;
+    private final CategoryMapper categoryMapper;
+    private final DuplicateService duplicateService;
 
 
     //  카테고리별 메뉴리스트 종류 -> 9개씩
@@ -101,19 +100,21 @@ public class MenuService {
         return new CMRespAdminCategoryAndOption(options, categories);
     }
 
-    // 메뉴 추가
+    // 메뉴 추가 (jpa)
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean addMenu(ReqAdminDto dto) {
         duplicateService.isDuplicateName("menu", dto.getMenuName());
-        Menu menu = dto.toMenuEntity();
+
+        MenuJpaEntity menuEntity = dto.toMenuEntity();
         // 메뉴 추가 순차적실행
-        menuRepository.save(menu);
+        menuRepository.save(menuEntity);
+
         // 옵션 추가
         if (dto.getOptionIds().size() > 0) {
-            menuDetailMapper.save(menu.getMenuId(), dto.getOptionIds());
+            menuDetailMapper.save(menuEntity.getMenuId(), dto.getOptionIds());
         }
         if (dto.getCategories() != null) {
-            categoryMapper.saveByMenuId(menu.getMenuId(), dto.getCategories());
+            categoryMapper.saveByMenuId(menuEntity.getMenuId(), dto.getCategories());
         }
         return true;
     }
@@ -123,14 +124,15 @@ public class MenuService {
         return menuMapper.menuDetailByMenuId(menuId).toMenuDetail();
     }
 
-    // 메뉴수정
+    // 메뉴 수정 (jpa)
     @Transactional(rollbackFor = RuntimeException.class)
     public boolean modifyMenu(ReqAdminModifyDto dto) {
         try {
-            // 해당 메뉴가 있는 지 확인
-            Menu menu = menuRepository.findById(dto.getMenuId())
+            // 해당 메뉴가 있는 지 확인 (jpa 영속성 컨텍스트))
+            MenuJpaEntity menuEntity = menuRepository.findById(dto.getMenuId())
                     .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 메뉴입니다."));
-            menu.updateMenu(dto);
+            // 메뉴 수정
+            menuEntity.updateMenu(dto);
             // 데이터무결성 위반 예외처리
         } catch (DataIntegrityViolationException e) {
             throw new DuplicateNameException("Duplicate MenuName");
@@ -149,7 +151,7 @@ public class MenuService {
         return true;
     }
 
-    // 메뉴 삭제
+    // 메뉴 삭제 (jpa)
     @Transactional
     public boolean deleteMenu(ReqAdminDeleteDto dto) {
         // 메뉴 카테고리 삭제
@@ -165,7 +167,8 @@ public class MenuService {
         return successCount > 0; // 성공 여부 리턴
     }
 
-    // 메뉴 상태 변경
+    // 메뉴 상태 변경 (jpa)
+    @Transactional
     public boolean updateMenuStatus(Long menuId) {
         return menuRepository.updateMenuStatus(menuId) > 0;
     }

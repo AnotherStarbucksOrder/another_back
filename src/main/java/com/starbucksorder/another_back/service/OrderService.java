@@ -1,14 +1,13 @@
 package com.starbucksorder.another_back.service;
 
 import com.starbucksorder.another_back.aspect.LogAspect;
-import com.starbucksorder.another_back.dto.admin.request.order.ReqAdminOrderCancelDto;
 import com.starbucksorder.another_back.dto.admin.request.order.ReqAdminOrderDto;
 import com.starbucksorder.another_back.dto.admin.response.CMRespAdminDto;
 import com.starbucksorder.another_back.dto.admin.response.order.RespOrderDetailDto;
 import com.starbucksorder.another_back.dto.admin.response.order.RespOrderListDto;
 import com.starbucksorder.another_back.dto.user.request.Order.ReqOrderDto;
-import com.starbucksorder.another_back.entity.Order;
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.Order;
+import com.starbucksorder.another_back.domain.User;
 import com.starbucksorder.another_back.repository.CouponMapper;
 import com.starbucksorder.another_back.repository.OrderDetailMapper;
 import com.starbucksorder.another_back.repository.OrderMapper;

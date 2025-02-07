@@ -5,7 +5,7 @@ import com.starbucksorder.another_back.dto.admin.request.ReqAdminUserDto;
 import com.starbucksorder.another_back.dto.admin.request.user.ReqAdminSearchDto;
 import com.starbucksorder.another_back.dto.admin.response.CMRespAdminDto;
 import com.starbucksorder.another_back.dto.admin.response.user.RespAdminDto;
-import com.starbucksorder.another_back.entity.User;
+import com.starbucksorder.another_back.domain.User;
 import com.starbucksorder.another_back.exception.DuplicateNameException;
 import com.starbucksorder.another_back.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
